@@ -21,6 +21,7 @@
     <p id="gamma"></p>
     <canvas id="canvas"></canvas>
 
+    <script type="text/javascript" src="fulltilt.js"></script>
     <script>
     var canvas = document.getElementById('canvas');
     var c = canvas.getContext('2d');
@@ -66,20 +67,55 @@
 
     var center = new Point(viewportW/2, viewportH/2);
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+     
+
 
 
     window.ondeviceorientation = function(event) {
+        // Create a new FULLTILT Promise for e.g. *compass*-based deviceorientation data
+  var promise = new FULLTILT.getDeviceOrientation({ 'type': 'world' });
 
-        c.fillStyle = "#ffffff";
-        c.fillRect(0,0,viewportW,viewportH);
+  // FULLTILT.DeviceOrientation instance placeholder
+  var deviceOrientation;
 
-        alpha = Math.round(event.alpha);
-        beta = Math.round(event.beta);
-        gamma = Math.round(event.gamma);
+  promise
+    .then(function(controller) {
+      // Store the returned FULLTILT.DeviceOrientation object
+      deviceOrientation = controller;
+    })
+    .catch(function(message) {
+      console.error(message);
 
-        var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
+      // Optionally set up fallback controls...
+      // initManualControls();
+    });
 
-        document.getElementById("alpha").innerHTML = "alpha" + Math.tan(alpha/180 * Math.PI);
+  (function draw() {
+
+    // If we have a valid FULLTILT.DeviceOrientation object then use it
+    if (deviceOrientation) {
+
+      // Obtain the *screen-adjusted* normalized device rotation
+      // as Quaternion, Rotation Matrix and Euler Angles objects
+      // from our FULLTILT.DeviceOrientation object
+      var quaternion = deviceOrientation.getScreenAdjustedQuaternion();
+      var matrix = deviceOrientation.getScreenAdjustedMatrix();
+      var euler = deviceOrientation.getScreenAdjustedEuler();
+
+      // Do something with our quaternion, matrix, euler objects...
+      console.log(quaternion);
+      console.log(matrix);
+      console.log(euler);
+
+      c.fillStyle = "#ffffff";
+      c.fillRect(0,0,viewportW,viewportH);
+
+       
+
+        var rotatedline = new Line(Math.tan(euler.alpha/180 * Math.PI), center);
+
+        document.getElementById("alpha").innerHTML = "alpha" + Math.tan(euler.alpha/180 * Math.PI);
         
         document.getElementById("gamma").innerHTML = "p1 (0, " + rotatedline.getpY(0) + ")  p2 (" + viewportW + ", " + rotatedline.getpY(viewportW) + ") p3 (" + viewportW + ", " + viewportH + ") p4 ( 0, " +  viewportH + ")";
 
@@ -92,7 +128,14 @@
         var p4 = new Point(0, viewportH);
 
         drawQuadrangle(p1, p2, p3, p4, "#0055ff");
+
     }
+
+        
+
+  })();
+        
+     }
 
 
     </script>
