@@ -71,6 +71,10 @@
 
 
     window.ondeviceorientation = function(event) {
+
+        c.fillStyle = "#ffffff";
+        c.fillRect(0,0,viewportW,viewportH);
+
         alpha = Math.round(event.alpha);
         beta = Math.round(event.beta);
         gamma = Math.round(event.gamma);
