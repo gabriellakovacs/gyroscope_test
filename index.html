@@ -101,7 +101,7 @@
       // as Quaternion, Rotation Matrix and Euler Angles objects
       // from our FULLTILT.DeviceOrientation object
       quaternion = deviceOrientation.getScreenAdjustedQuaternion();
-      matrix = deviceOrientation.getScreenAdjustedMatrix();
+      euler2 = deviceOrientation.getFixedFrameEuler();
       euler = deviceOrientation.getScreenAdjustedEuler();
 
       // Do something with our quaternion, matrix, euler objects...
@@ -112,6 +112,10 @@
       document.getElementById("euleralpha").innerHTML = "euler alpha   " + euler.alpha;
         document.getElementById("eulerbeta").innerHTML = "euler beta    " + euler.beta;
         document.getElementById("eulergamma").innerHTML = "euler gamma   " + euler.gamma;
+
+        document.getElementById("alpha").innerHTML = "alpha" + euler2.alpha;
+        document.getElementById("beta").innerHTML = "beta" + euler2.beta;
+        document.getElementById("gamma").innerHTML = "gamma" + euler2.gamma;
 
     }
 
@@ -133,9 +137,7 @@
 
         // var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
 
-        document.getElementById("alpha").innerHTML = "alpha" + alpha;
-        document.getElementById("beta").innerHTML = "beta" + beta;
-        document.getElementById("gamma").innerHTML = "gamma" + gamma;
+        
         
         // document.getElementById("gamma").innerHTML = "p1 (0, " + rotatedline.getpY(0) + ")  p2 (" + viewportW + ", " + rotatedline.getpY(viewportW) + ") p3 (" + viewportW + ", " + viewportH + ") p4 ( 0, " +  viewportH + ")";
 
