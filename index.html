@@ -19,6 +19,10 @@
     <p id="alpha"></p>
     <p id="beta"></p>
     <p id="gamma"></p>
+
+    <p id="euleralpha"></p>
+    <p id="eulerbeta"></p>
+    <p id="eulergamma"></p>
     <canvas id="canvas"></canvas>
 
     <script type="text/javascript" src="fulltilt.js"></script>
@@ -105,9 +109,9 @@
       console.log(matrix);
       console.log(euler.alpha);
 
-      document.getElementById("alpha").innerHTML = "alpha   " + euler.alpha;
-        document.getElementById("beta").innerHTML = "beta    " + euler.beta;
-        document.getElementById("gamma").innerHTML = "gamma   " + euler.gamma;
+      document.getElementById("euleralpha").innerHTML = "euler alpha   " + euler.alpha;
+        document.getElementById("eulerbeta").innerHTML = "euler beta    " + euler.beta;
+        document.getElementById("eulergamma").innerHTML = "euler gamma   " + euler.gamma;
 
     }
 
@@ -118,33 +122,33 @@
 
 
 
-    // window.ondeviceorientation = function(event) {
+    window.ondeviceorientation = function(event) {
 
-    //     c.fillStyle = "#ffffff";
-    //     c.fillRect(0,0,viewportW,viewportH);
+        // c.fillStyle = "#ffffff";
+        // c.fillRect(0,0,viewportW,viewportH);
 
-    //     alpha = Math.round(event.alpha);
-    //     beta = Math.round(event.beta);
-    //     gamma = Math.round(event.gamma);
+        alpha = Math.round(event.alpha);
+        beta = Math.round(event.beta);
+        gamma = Math.round(event.gamma);
 
-    //     var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
+        // var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
 
-    //     document.getElementById("alpha").innerHTML = "alpha" + euler.alpha;
-    //     document.getElementById("beta").innerHTML = "beta" + euler.beta;
-    //     document.getElementById("gamma").innerHTML = "gamma" + euler.gamma;
+        document.getElementById("alpha").innerHTML = "alpha" + alpha;
+        document.getElementById("beta").innerHTML = "beta" + beta;
+        document.getElementById("gamma").innerHTML = "gamma" + gamma;
         
-    //     document.getElementById("gamma").innerHTML = "p1 (0, " + rotatedline.getpY(0) + ")  p2 (" + viewportW + ", " + rotatedline.getpY(viewportW) + ") p3 (" + viewportW + ", " + viewportH + ") p4 ( 0, " +  viewportH + ")";
+        // document.getElementById("gamma").innerHTML = "p1 (0, " + rotatedline.getpY(0) + ")  p2 (" + viewportW + ", " + rotatedline.getpY(viewportW) + ") p3 (" + viewportW + ", " + viewportH + ") p4 ( 0, " +  viewportH + ")";
 
         
 
 
-    //     var p1 = new Point(0, rotatedline.getpY(0));
-    //     var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
-    //     var p3 = new Point(viewportW, viewportH);
-    //     var p4 = new Point(0, viewportH);
+        // var p1 = new Point(0, rotatedline.getpY(0));
+        // var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
+        // var p3 = new Point(viewportW, viewportH);
+        // var p4 = new Point(0, viewportH);
 
-    //     drawQuadrangle(p1, p2, p3, p4, "#0055ff");
-    // }
+        // drawQuadrangle(p1, p2, p3, p4, "#0055ff");
+    }
 
 
     </script>
