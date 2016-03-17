@@ -64,8 +64,6 @@
     }
 
 
-
-
     var center = new Point(viewportW/2, viewportH/2);
 
 
@@ -79,9 +77,9 @@
         beta = Math.round(event.beta);
         gamma = Math.round(event.gamma);
 
-        var rotatedline = new Line(beta, center);
+        var rotatedline = new Line(alpha, center);
 
-        document.getElementById("alpha").innerHTML = beta;
+        document.getElementById("alpha").innerHTML = alpha;
         
         document.getElementById("gamma").innerHTML = "p1 (0, " + rotatedline.getpY(0) + ")  p2 (" + viewportW + ", " + rotatedline.getpY(viewportW) + ") p3 (" + viewportW + ", " + viewportH + ") p4 ( 0, " +  viewportH + ")";
 
