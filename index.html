@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>mirror</title>
+    <title>gyroscope-test</title>
     <style>
 
     body {
@@ -16,19 +16,30 @@
 
 </head>
 <body>
+    <p id="alpha"></p>
+    <p id="beta"></p>
+    <p id="gamma"></p>
     <canvas id="canvas"></canvas>
 
     <script>
     var canvas = document.getElementById('canvas');
     var c = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    var w = window.innerWidth;
-    var h = window.innerHeight;
+    var viewportW = window.innerWidth;
+    var viewportH = window.innerHeight;
+
+    canvas.width = viewportW;
+    canvas.height = viewportH;
+    
 
     c.fillStyle = "#0055ff";
-    c.fillRect(0,h/2,w,h);
+    c.fillRect(0,viewportH/2,viewportW,viewportH);
+
+    function Point (x, y){
+
+               this.x = x;
+               this.y = y;
+           }
 
     function Line (slope, p){
         this.slope = slope;
@@ -62,6 +73,11 @@
     window.ondeviceorientation = function(event) {
         alpha = Math.round(event.alpha);
         beta = Math.round(event.beta);
+        gamma = Math.round(event.gamma);
+
+        document.getElementById("alpha").innerHTML = alpha;
+        document.getElementById("beta").innerHTML = beta;
+        document.getElementById("gamma").innerHTML = gamma;
 
         var rotatedline = new Line(alpha, center);
 
