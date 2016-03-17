@@ -77,9 +77,9 @@
         beta = Math.round(event.beta);
         gamma = Math.round(event.gamma);
 
-        var rotatedline = new Line(gamma, center);
+        var rotatedline = new Line(Math.tan(gamma), center);
 
-        document.getElementById("alpha").innerHTML = gamma;
+        document.getElementById("alpha").innerHTML = "gamma" + Math.tan(gamma);
         
         document.getElementById("gamma").innerHTML = "p1 (0, " + rotatedline.getpY(0) + ")  p2 (" + viewportW + ", " + rotatedline.getpY(viewportW) + ") p3 (" + viewportW + ", " + viewportH + ") p4 ( 0, " +  viewportH + ")";
 
