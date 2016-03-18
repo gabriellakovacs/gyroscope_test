@@ -25,7 +25,7 @@
     <p id="eulergamma"></p>
     <canvas id="canvas"></canvas>
 
-    <script type="text/javascript" src="fulltilt.js"></script>
+    // <script type="text/javascript" src="fulltilt.js"></script>
     <script>
     var canvas = document.getElementById('canvas');
     var c = canvas.getContext('2d');
@@ -67,89 +67,91 @@
         c.lineTo(p4.x, p4.y);
         c.fill();
     }
-    var quaternion;
-      var matrix ;
-      var euler ;
+    
 
     var center = new Point(viewportW/2, viewportH/2);
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-     // Create a new FULLTILT Promise for e.g. *compass*-based deviceorientation data
-  var promise = new FULLTILT.getDeviceOrientation({ 'type': 'world' });
-
-  // FULLTILT.DeviceOrientation instance placeholder
-  var deviceOrientation;
-
-  promise
-    .then(function(controller) {
-      // Store the returned FULLTILT.DeviceOrientation object
-      deviceOrientation = controller;
-    })
-    .catch(function(message) {
-      console.error(message);
-
-      // Optionally set up fallback controls...
-      // initManualControls();
-    });
-
-  (function draw() {
-
-    // If we have a valid FULLTILT.DeviceOrientation object then use it
-    if (deviceOrientation) {
-
-      // Obtain the *screen-adjusted* normalized device rotation
-      // as Quaternion, Rotation Matrix and Euler Angles objects
-      // from our FULLTILT.DeviceOrientation object
-      quaternion = deviceOrientation.getScreenAdjustedQuaternion();
-      euler2 = deviceOrientation.getFixedFrameEuler();
-      euler = deviceOrientation.getScreenAdjustedEuler();
-
-      // Do something with our quaternion, matrix, euler objects...
-      console.log(quaternion);
-      console.log(matrix);
-      console.log(euler.alpha);
-
-      document.getElementById("euleralpha").innerHTML = "euler alpha   " + euler.alpha;
-        document.getElementById("eulerbeta").innerHTML = "euler beta    " + euler.beta;
-        document.getElementById("eulergamma").innerHTML = "euler gamma   " + euler.gamma;
-
-        document.getElementById("alpha").innerHTML = "alpha" + euler2.alpha;
-        document.getElementById("beta").innerHTML = "beta" + euler2.beta;
-        document.getElementById("gamma").innerHTML = "gamma" + euler2.gamma;
-
-    }
-
-    // Execute function on each browser animation frame
-    requestAnimationFrame(draw);
-
-  })();
+   var x = 0, 
+   y = 0, 
+   vx = 0, 
+   vy = 0, 
+   ax = 0, 
+   ay = 0;
+  
 
 
+// if (window.DeviceMotionEvent != undefined) {
+//   window.ondevicemotion = function(e) {
+//     ax = event.accelerationIncludingGravity.x * 5;
+//     ay = event.accelerationIncludingGravity.y * 5;
+    
 
-    window.ondeviceorientation = function(event) {
+//     if ( e.rotationRate ) {
+//       document.getElementById("alpha").innerHTML = e.rotationRate.alpha;
+//       document.getElementById("beta").innerHTML = e.rotationRate.beta;
+//       document.getElementById("gamma").innerHTML = e.rotationRate.gamma;
+//     }   
+//   }
 
-        // c.fillStyle = "#ffffff";
-        // c.fillRect(0,0,viewportW,viewportH);
+//   setInterval( function() {
+//     var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
+//     if ( landscapeOrientation) {
+//       vx = vx + ay;
+//       vy = vy + ax;
+//     } else {
+//       vy = vy - ay;
+//       vx = vx + ax;
+//     }
+//     vx = vx * 0.98;
+//     vy = vy * 0.98;
+//     y = parseInt(y + vy / 50);
+//     x = parseInt(x + vx / 50);
+    
+//     boundingBoxCheck();
+    
+//     sphere.style.top = y + "px";
+//     sphere.style.left = x + "px";
+    
+//   }, 25);
+// } 
 
-        alpha = Math.round(event.alpha);
-        beta = Math.round(event.beta);
-        gamma = Math.round(event.gamma);
 
-        // var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
+// function boundingBoxCheck(){
+//   if (x<0) { x = 0; vx = -vx; }
+//   if (y<0) { y = 0; vy = -vy; }
+//   if (x>document.documentElement.clientWidth-20) { x = document.documentElement.clientWidth-20; vx = -vx; }
+//   if (y>document.documentElement.clientHeight-20) { y = document.documentElement.clientHeight-20; vy = -vy; }
+  
+// }
+
+
+
+
+    window.ondevicemotion = function(event) {
+
+        c.fillStyle = "#ffffff";
+        c.fillRect(0,0,viewportW,viewportH);
+
+        alpha = Math.round(event.rotationRate.alpha);
+        beta = Math.round(event.rotationRate.beta);
+        gamma = Math.round(event.rotationRate.gamma);
+
+        var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
 
         
         
-        // document.getElementById("gamma").innerHTML = "p1 (0, " + rotatedline.getpY(0) + ")  p2 (" + viewportW + ", " + rotatedline.getpY(viewportW) + ") p3 (" + viewportW + ", " + viewportH + ") p4 ( 0, " +  viewportH + ")";
+        document.getElementById("gamma").innerHTML = "p1 (0, " + rotatedline.getpY(0) + ")  p2 (" + viewportW + ", " + rotatedline.getpY(viewportW) + ") p3 (" + viewportW + ", " + viewportH + ") p4 ( 0, " +  viewportH + ")";
 
         
 
 
-        // var p1 = new Point(0, rotatedline.getpY(0));
-        // var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
-        // var p3 = new Point(viewportW, viewportH);
-        // var p4 = new Point(0, viewportH);
+        var p1 = new Point(0, rotatedline.getpY(0));
+        var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
+        var p3 = new Point(viewportW, viewportH);
+        var p4 = new Point(0, viewportH);
 
-        // drawQuadrangle(p1, p2, p3, p4, "#0055ff");
+        drawQuadrangle(p1, p2, p3, p4, "#0055ff");
     }
 
 
