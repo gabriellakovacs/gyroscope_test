@@ -92,13 +92,24 @@ pg = document.getElementById('gamma');
         pb.innerHTML = "beta " + beta;
         pg.innerHTML = "gamma " + gamma;
 
-        
-        var p1 = new Point(0, rotatedline.getpY(0));
-        var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
-        var p3 = new Point(viewportW, viewportH);
+        if (beta >= 88){
+
+          c.fillStyle = "#0055ff";
+    c.fillRect(0,viewportH/2,viewportW,viewportH);
+
+        } else {
+          var p1 = new Point(0, rotatedline.getpY(0));
+          var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
+           var p3 = new Point(viewportW, viewportH);
         var p4 = new Point(0, viewportH);
+        
 
         drawQuadrangle(p1, p2, p3, p4, "#0055ff");
+        
+
+        }
+
+       
     }
 
 
