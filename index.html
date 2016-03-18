@@ -133,13 +133,13 @@
         // c.fillStyle = "#ffffff";
         // c.fillRect(0,0,viewportW,viewportH);
 
-        alpha = Math.round(event.accelerationIncludingGravity.x);
-        beta = Math.round(event.accelerationIncludingGravity.y  );
-        gamma = Math.round(event.accelerationIncludingGravity.z);
+        alpha = Math.round(event.rotationRate.alpha);
+        beta = Math.round(event.rotationRate.beta  );
+        gamma = Math.round(event.rotationRate.gamma);
 
-        document.getElementById("alpha").innerHTML = "original" + alpha;
-      document.getElementById("beta").innerHTML = "original" + beta;
-      document.getElementById("gamma").innerHTML = "original" + gamma;
+        document.getElementById("alpha").innerHTML = "alpha: " + alpha;
+      document.getElementById("beta").innerHTML = "beta: " + beta;
+      document.getElementById("gamma").innerHTML = "gamma: " + gamma;
     
 
         // var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
