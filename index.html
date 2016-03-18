@@ -4,66 +4,169 @@
     <title>gyroscope-test</title>
     <style>
 
-    .garden {
-  position: relative;
-  width : 200px;
-  height: 200px;
-  border: 5px solid #CCC;
-  border-radius: 10px;
-}
+    body {
+        margin: 0;
+        padding: 0;
+    }
 
-.ball {
-  position: absolute;
-  top   : 90px;
-  left  : 90px;
-  width : 20px;
-  height: 20px;
-  background: green;
-  border-radius: 100%;
+    html {
+        overflow: hidden;
+    }
+    #sphere {
+  position: absolute; 
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  -webkit-radius: 50px;
+  background-color: blue;
 }
     </style>
 
 </head>
 <body>
-    <div class="garden">
-  <div class="ball"></div>
-</div>
+  <div id="sphere"></div>
+    <p id="alpha"></p>
+    <p id="beta"></p>
+    <p id="gamma"></p>
 
-<pre class="output"></pre>
+    <p id="rotationAlpha"></p>
+    <p id="rotationBeta"></p>
+    <p id="rotationGamma"></p>
+    <canvas id="canvas"></canvas>
 
     // <script type="text/javascript" src="fulltilt.js"></script>
     <script>
-    var ball   = document.querySelector('.ball');
-var garden = document.querySelector('.garden');
-var output = document.querySelector('.output');
+    var canvas = document.getElementById('canvas');
+    var c = canvas.getContext('2d');
 
-var maxX = garden.clientWidth  - ball.clientWidth;
-var maxY = garden.clientHeight - ball.clientHeight;
+    var viewportW = window.innerWidth;
+    var viewportH = window.innerHeight;
 
-function handleOrientation(event) {
-  var x = event.beta;  // In degree in the range [-180,180]
-  var y = event.gamma; // In degree in the range [-90,90]
+    canvas.width = viewportW;
+    canvas.height = viewportH;
+    
 
-  output.innerHTML  = "beta : " + x + "\n";
-  output.innerHTML += "gamma: " + y + "\n";
+    // c.fillStyle = "#0055ff";
+    // c.fillRect(0,viewportH/2,viewportW,viewportH);
 
-  // Because we don't want to have the device upside down
-  // We constrain the x value to the range [-90,90]
-  if (x >  90) { x =  90};
-  if (x < -90) { x = -90};
+    function Point (x, y){
 
-  // To make computation easier we shift the range of 
-  // x and y to [0,180]
-  x += 90;
-  y += 90;
+               this.x = x;
+               this.y = y;
+           }
 
-  // 10 is half the size of the ball
-  // It center the positioning point to the center of the ball
-  ball.style.top  = (maxX*x/180 - 10) + "px";
-  ball.style.left = (maxY*y/180 - 10) + "px";
+    function Line (slope, p){
+        this.slope = slope;
+        this.constant = p.y - slope * p.x;
+    }
+
+    Line.prototype.getpY = function(pX) {
+        return pX * this.slope + this.constant;
+
+    };   
+
+
+
+    function drawQuadrangle (p1, p2, p3, p4, color){
+        c.fillStyle = color;
+        c.beginPath();
+        c.moveTo(p1.x, p1.y);
+        c.lineTo(p2.x, p2.y);
+        c.lineTo(p3.x, p3.y);
+        c.lineTo(p4.x, p4.y);
+        c.fill();
+    }
+    
+
+    var center = new Point(viewportW/2, viewportH/2);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+   var x = 0, 
+   y = 0, 
+   vx = 0, 
+   vy = 0, ax = 0, ay = 0;
+  
+
+
+if (window.DeviceMotionEvent != undefined) {
+  window.ondevicemotion = function(e) {
+    ax = event.accelerationIncludingGravity.x * 5;
+    ay = event.accelerationIncludingGravity.y * 5;
+   
+
+    if ( e.rotationRate ) {
+      document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
+      document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
+      document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
+    }   
+  }
+
+  setInterval( function() {
+    var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
+    if ( landscapeOrientation) {
+      vx = vx + ay;
+      vy = vy + ax;
+    } else {
+      vy = vy - ay;
+      vx = vx + ax;
+    }
+    vx = vx * 0.98;
+    vy = vy * 0.98;
+    y = parseInt(y + vy / 50);
+    x = parseInt(x + vx / 50);
+    
+    boundingBoxCheck();
+    
+    sphere.style.top = y + "px";
+    sphere.style.left = x + "px";
+    
+  }, 25);
+} 
+
+
+function boundingBoxCheck(){
+  if (x<0) { x = 0; vx = -vx; }
+  if (y<0) { y = 0; vy = -vy; }
+  if (x>document.documentElement.clientWidth-20) { x = document.documentElement.clientWidth-20; vx = -vx; }
+  if (y>document.documentElement.clientHeight-20) { y = document.documentElement.clientHeight-20; vy = -vy; }
+  
 }
 
-window.addEventListener('deviceorientation', handleOrientation);
+
+
+
+    window.ondeviceorientation = function(event) {
+
+        // c.fillStyle = "#ffffff";
+        // c.fillRect(0,0,viewportW,viewportH);
+
+        alpha = Math.round(event.alpha);
+        beta = Math.round(event.beta);
+        gamma = Math.round(event.gamma);
+
+        document.getElementById("alpha").innerHTML = alpha;
+      document.getElementById("beta").innerHTML = beta;
+      document.getElementById("gamma").innerHTML = gamma;
+    
+
+        // var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
+
+        
+        
+        // document.getElementById("gamma").innerHTML = "p1 (0, " + rotatedline.getpY(0) + ")  p2 (" + viewportW + ", " + rotatedline.getpY(viewportW) + ") p3 (" + viewportW + ", " + viewportH + ") p4 ( 0, " +  viewportH + ")";
+
+        
+
+
+        // var p1 = new Point(0, rotatedline.getpY(0));
+        // var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
+        // var p3 = new Point(viewportW, viewportH);
+        // var p4 = new Point(0, viewportH);
+
+        // drawQuadrangle(p1, p2, p3, p4, "#0055ff");
+    }
+
+
     </script>
 </body>
 </html>
