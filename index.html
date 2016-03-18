@@ -81,68 +81,68 @@
     var center = new Point(viewportW/2, viewportH/2);
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-   var x = 0, 
-   y = 0, 
-   vx = 0, 
-   vy = 0, ax = 0, ay = 0;
+//    var x = 0, 
+//    y = 0, 
+//    vx = 0, 
+//    vy = 0, ax = 0, ay = 0;
   
 
 
-if (window.DeviceMotionEvent != undefined) {
-  window.ondevicemotion = function(e) {
-    ax = event.accelerationIncludingGravity.x * 5;
-    ay = event.accelerationIncludingGravity.y * 5;
+// if (window.DeviceMotionEvent != undefined) {
+//   window.ondevicemotion = function(e) {
+//     ax = event.accelerationIncludingGravity.x * 5;
+//     ay = event.accelerationIncludingGravity.y * 5;
    
 
-    if ( e.rotationRate ) {
-      document.getElementById("rotationAlpha").innerHTML = Math.round(e.rotationRate.alpha);
-      document.getElementById("rotationBeta").innerHTML = Math.round(e.rotationRate.beta);
-      document.getElementById("rotationGamma").innerHTML = Math.round(e.rotationRate.gamma);
-    }   
-  }
+//     if ( e.rotationRate ) {
+//       document.getElementById("rotationAlpha").innerHTML = Math.round(e.rotationRate.alpha);
+//       document.getElementById("rotationBeta").innerHTML = Math.round(e.rotationRate.beta);
+//       document.getElementById("rotationGamma").innerHTML = Math.round(e.rotationRate.gamma);
+//     }   
+//   }
 
-  setInterval( function() {
-    var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
-    if ( landscapeOrientation) {
-      vx = vx + ay;
-      vy = vy + ax;
-    } else {
-      vy = vy - ay;
-      vx = vx + ax;
-    }
-    vx = vx * 0.98;
-    vy = vy * 0.98;
-    y = parseInt(y + vy / 50);
-    x = parseInt(x + vx / 50);
+//   setInterval( function() {
+//     var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
+//     if ( landscapeOrientation) {
+//       vx = vx + ay;
+//       vy = vy + ax;
+//     } else {
+//       vy = vy - ay;
+//       vx = vx + ax;
+//     }
+//     vx = vx * 0.98;
+//     vy = vy * 0.98;
+//     y = parseInt(y + vy / 50);
+//     x = parseInt(x + vx / 50);
     
-    boundingBoxCheck();
+//     boundingBoxCheck();
     
-    sphere.style.top = y + "px";
-    sphere.style.left = x + "px";
+//     sphere.style.top = y + "px";
+//     sphere.style.left = x + "px";
     
-  }, 25);
-} 
+//   }, 25);
+// } 
 
 
-function boundingBoxCheck(){
-  if (x<0) { x = 0; vx = -vx; }
-  if (y<0) { y = 0; vy = -vy; }
-  if (x>document.documentElement.clientWidth-20) { x = document.documentElement.clientWidth-20; vx = -vx; }
-  if (y>document.documentElement.clientHeight-20) { y = document.documentElement.clientHeight-20; vy = -vy; }
+// function boundingBoxCheck(){
+//   if (x<0) { x = 0; vx = -vx; }
+//   if (y<0) { y = 0; vy = -vy; }
+//   if (x>document.documentElement.clientWidth-20) { x = document.documentElement.clientWidth-20; vx = -vx; }
+//   if (y>document.documentElement.clientHeight-20) { y = document.documentElement.clientHeight-20; vy = -vy; }
   
-}
+// }
 
 
 
 
-    window.ondeviceorientation = function(event) {
+    window.ondevicemotion  = function(event) {
 
         // c.fillStyle = "#ffffff";
         // c.fillRect(0,0,viewportW,viewportH);
 
-        alpha = Math.round(event.alpha);
-        beta = Math.round(event.beta);
-        gamma = Math.round(event.gamma);
+        alpha = Math.round(event.accelerationIncludingGravity.x;  );
+        beta = Math.round(event.accelerationIncludingGravity.y  );
+        gamma = Math.round(event.accelerationIncludingGravity.z);
 
         document.getElementById("alpha").innerHTML = "original" + alpha;
       document.getElementById("beta").innerHTML = "original" + beta;
