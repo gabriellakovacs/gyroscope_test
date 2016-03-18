@@ -73,7 +73,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
    
-
+pa = document.getElementById('alpha');
+pb = document.getElementById('beta');
+pg = document.getElementById('gamma');
 
 
     window.ondeviceorientation = function(event) {
@@ -86,6 +88,9 @@
         gamma = Math.round(event.gamma);
 
         var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
+        pa.innerHTML = "alpha " + alpha;
+        pb.innerHTML = "beta " + beta;
+        pg.innerHTML = "gamma " + gamma;
 
         
         
