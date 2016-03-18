@@ -95,9 +95,9 @@ if (window.DeviceMotionEvent != undefined) {
    
 
     if ( e.rotationRate ) {
-      document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
-      document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
-      document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
+      document.getElementById("rotationAlpha").innerHTML = Math.round(e.rotationRate.alpha);
+      document.getElementById("rotationBeta").innerHTML = Math.round(e.rotationRate.beta);
+      document.getElementById("rotationGamma").innerHTML = Math.round(e.rotationRate.gamma);
     }   
   }
 
@@ -144,9 +144,9 @@ function boundingBoxCheck(){
         beta = Math.round(event.beta);
         gamma = Math.round(event.gamma);
 
-        document.getElementById("alpha").innerHTML = alpha;
-      document.getElementById("beta").innerHTML = beta;
-      document.getElementById("gamma").innerHTML = gamma;
+        document.getElementById("alpha").innerHTML = "original" + alpha;
+      document.getElementById("beta").innerHTML = "original" + beta;
+      document.getElementById("gamma").innerHTML = "original" + gamma;
     
 
         // var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
