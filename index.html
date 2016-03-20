@@ -300,7 +300,21 @@ pb = document.getElementById('beta'),
 pg = document.getElementById('gamma');
 
 
-    window.ondevicemotion = function(event) {
+    window.addEventListener("devicemotion", debounce(function (event) {rotateD(event);}, 200));
+
+    function debounce(fn, delay) {
+        var timer = null;
+        return function () {
+            var context = this, args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                fn.apply(context, args);
+            }, delay);
+        };
+    }
+
+
+    function rotateD(event) {
 
         c.fillStyle = "#ffffff";
         c.fillRect(0,0,viewportW,viewportH);
