@@ -28,245 +28,245 @@
 
     
     <canvas id="canvas"></canvas>
-    // <script>
-    // var deviceOrientationData ={alpha:0,beta:0,gamma:0};
+<script>
+    var deviceOrientationData ={alpha:0,beta:0,gamma:0};
 
-    // if (window.DeviceOrientationEvent) {
-    //     window.addEventListener("deviceorientation", function () {
-    //         processGyro(event.alpha, event.beta, event.gamma); 
-    //     }, true);
-    // } 
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener("deviceorientation", function () {
+            processGyro(event.alpha, event.beta, event.gamma); 
+        }, true);
+    } 
 
 
 
-    // function processGyro(alpha,beta,gamma) { 
-    //     deviceOrientationData.alpha=alpha;
-    //     deviceOrientationData.beta=beta;
-    //     deviceOrientationData.gamma=gamma;
+    function processGyro(alpha,beta,gamma) { 
+        deviceOrientationData.alpha=alpha;
+        deviceOrientationData.beta=beta;
+        deviceOrientationData.gamma=gamma;
         
-    //     document.getElementById("alpha").innerHTML=alpha;
-    //     document.getElementById("beta").innerHTML=beta;
-    //     document.getElementById("gamma").innerHTML =gamma;
-    // }
+        document.getElementById("alpha").innerHTML=alpha;
+        document.getElementById("beta").innerHTML=beta;
+        document.getElementById("gamma").innerHTML =gamma;
+    }
 
-    // var canvas = document.getElementById('canvas');
-    // var context = canvas.getContext('2d');
-    // context.canvas.width  = window.innerWidth;
-    // context.canvas.height = window.innerHeight;
-    // context.translate(canvas.width / 2, canvas.height / 2); //put 0,0,0 origin at center of screen instead of upper left corner
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    context.canvas.width  = window.innerWidth;
+    context.canvas.height = window.innerHeight;
+    context.translate(canvas.width / 2, canvas.height / 2); //put 0,0,0 origin at center of screen instead of upper left corner
 
-    // function degToRad(deg)// Degree-to-Radian conversion
-    // {
-    //      return deg * Math.PI / 180; 
-    // }
+    function degToRad(deg)// Degree-to-Radian conversion
+    {
+         return deg * Math.PI / 180; 
+    }
 
-    // function makeRect(width,height,depth)
-    // {
-    //     var newObj={};
-    //     var hw=width/2;
-    //     var hh=height/2;
-    //     var hd=depth/2;
-    //     newObj.vertices=[  [-hw,hh,hd],[hw,hh,hd],[hw,-hh,hd],//first triangle
-    //                       [-hw,hh,hd],[-hw,-hh,hd],[hw,-hh,hd],//2 triangles make front side
-    //                       [-hw,hh,-hd],[-hw,hh,hd],[-hw,-hh,-hd], //left side
-    //                       [-hw,hh,hd],[-hw,-hh,hd],[-hw,-hh,-hd],
-    //                       [hw,hh,-hd],[hw,hh,hd],[hw,-hh,-hd], //right side
-    //                       [hw,hh,hd],[hw,-hh,hd],[hw,-hh,-hd],
-    //                       [-hw,hh,-hd],[hw,hh,-hd],[hw,-hh,-hd],//back
-    //                       [-hw,hh,-hd],[-hw,-hh,-hd],[hw,-hh,-hd],
-    //                       [-hw,hh,-hd],[hw,hh,-hd],[hw,hh,hd],//top
-    //                       [-hw,hh,-hd],[-hw,hh,hd],[hw,hh,hd],
-    //                       [-hw,-hh,-hd],[hw,-hh,-hd],[hw,-hh,hd],//bottom
-    //                       [-hw,-hh,-hd],[-hw,-hh,hd],[hw,-hh,hd]
-    //     ];
+    function makeRect(width,height,depth)
+    {
+        var newObj={};
+        var hw=width/2;
+        var hh=height/2;
+        var hd=depth/2;
+        newObj.vertices=[  [-hw,hh,hd],[hw,hh,hd],[hw,-hh,hd],//first triangle
+                          [-hw,hh,hd],[-hw,-hh,hd],[hw,-hh,hd],//2 triangles make front side
+                          [-hw,hh,-hd],[-hw,hh,hd],[-hw,-hh,-hd], //left side
+                          [-hw,hh,hd],[-hw,-hh,hd],[-hw,-hh,-hd],
+                          [hw,hh,-hd],[hw,hh,hd],[hw,-hh,-hd], //right side
+                          [hw,hh,hd],[hw,-hh,hd],[hw,-hh,-hd],
+                          [-hw,hh,-hd],[hw,hh,-hd],[hw,-hh,-hd],//back
+                          [-hw,hh,-hd],[-hw,-hh,-hd],[hw,-hh,-hd],
+                          [-hw,hh,-hd],[hw,hh,-hd],[hw,hh,hd],//top
+                          [-hw,hh,-hd],[-hw,hh,hd],[hw,hh,hd],
+                          [-hw,-hh,-hd],[hw,-hh,-hd],[hw,-hh,hd],//bottom
+                          [-hw,-hh,-hd],[-hw,-hh,hd],[hw,-hh,hd]
+        ];
         
-    //     return newObj;
-    // }
+        return newObj;
+    }
 
-    // var cube=makeRect(canvas.width/5,canvas.width/5,canvas.width/5);
-    // cube.color="purple";
-    // var xAxis=makeRect(440,10,10);
-    // xAxis.color="green";
-    // var yAxis=makeRect(10,440,10);
-    // yAxis.color="red";
-    // var zAxis=makeRect(10,10,440);
-    // zAxis.color="blue";
+    var cube=makeRect(canvas.width/5,canvas.width/5,canvas.width/5);
+    cube.color="purple";
+    var xAxis=makeRect(440,10,10);
+    xAxis.color="green";
+    var yAxis=makeRect(10,440,10);
+    yAxis.color="red";
+    var zAxis=makeRect(10,10,440);
+    zAxis.color="blue";
 
 
-    // function renderLoop() {
-    //   requestAnimationFrame( renderLoop );
-    //   context.clearRect( -canvas.width/2, -canvas.height/2, canvas.width, canvas.height);
+    function renderLoop() {
+      requestAnimationFrame( renderLoop );
+      context.clearRect( -canvas.width/2, -canvas.height/2, canvas.width, canvas.height);
       
-    //   //create some fake data in case web page isn't being accessed from a mobile or gyro enabled device
-    //   if(!( window.DeviceOrientationEvent && 'ontouchstart' in window))
-    //   {
-    //     this.fakeAlpha = (this.fakeAlpha || 0)+ .0;//z axis - use 0 to turn off rotation
-    //     this.fakeBeta = (this.fakeBeta || 0)+ .7;//x axis
-    //     this.fakeGamma = (this.fakeGamma || 0)+ .5;//y axis
-    //     processGyro(this.fakeAlpha,this.fakeBeta,this.fakeGamma);
-    //   }
+      //create some fake data in case web page isn't being accessed from a mobile or gyro enabled device
+      if(!( window.DeviceOrientationEvent && 'ontouchstart' in window))
+      {
+        this.fakeAlpha = (this.fakeAlpha || 0)+ .0;//z axis - use 0 to turn off rotation
+        this.fakeBeta = (this.fakeBeta || 0)+ .7;//x axis
+        this.fakeGamma = (this.fakeGamma || 0)+ .5;//y axis
+        processGyro(this.fakeAlpha,this.fakeBeta,this.fakeGamma);
+      }
       
-    //   renderObj(cube);
-    //   renderObj(xAxis);
-    //   renderObj(yAxis);
-    //   renderObj(zAxis);
-    // }
-    // renderLoop();
+      renderObj(cube);
+      renderObj(xAxis);
+      renderObj(yAxis);
+      renderObj(zAxis);
+    }
+    renderLoop();
 
-    // function renderObj(obj)//renders an object as a series of triangles
-    // {
-    //     var rotatedObj=rotateObject(obj);
-    //     context.lineWidth = 1;
-    //     context.strokeStyle = obj.color;
+    function renderObj(obj)//renders an object as a series of triangles
+    {
+        var rotatedObj=rotateObject(obj);
+        context.lineWidth = 1;
+        context.strokeStyle = obj.color;
         
-    //     for(var i=0 ; i<obj.vertices.length ; i+=3)
-    //     {
-    //         for (var k=0;k<3;k++)
-    //         {
-    //           var vertexFrom=rotatedObj.vertices[i+k];
-    //           var temp=i+k+1;
-    //           if(k==2) 
-    //               temp=i;
+        for(var i=0 ; i<obj.vertices.length ; i+=3)
+        {
+            for (var k=0;k<3;k++)
+            {
+              var vertexFrom=rotatedObj.vertices[i+k];
+              var temp=i+k+1;
+              if(k==2) 
+                  temp=i;
                   
-    //           var vertexTo=rotatedObj.vertices[temp];       
-    //           context.beginPath();
-    //           context.moveTo(scaleByZ(vertexFrom[0],vertexFrom[2]), -scaleByZ(vertexFrom[1],vertexFrom[2]));
-    //           context.lineTo(scaleByZ(vertexTo[0],vertexTo[2]), -scaleByZ(vertexTo[1],vertexTo[2]));
-    //           context.stroke();
-    //         }
-    //     }
-    // }
+              var vertexTo=rotatedObj.vertices[temp];       
+              context.beginPath();
+              context.moveTo(scaleByZ(vertexFrom[0],vertexFrom[2]), -scaleByZ(vertexFrom[1],vertexFrom[2]));
+              context.lineTo(scaleByZ(vertexTo[0],vertexTo[2]), -scaleByZ(vertexTo[1],vertexTo[2]));
+              context.stroke();
+            }
+        }
+    }
 
-    // function scaleByZ(val,z)
-    // {
-    //     var focalLength=900; 
-    //     var scale= focalLength/((-z)+focalLength);
-    //     return val*scale;
-    // }
+    function scaleByZ(val,z)
+    {
+        var focalLength=900; 
+        var scale= focalLength/((-z)+focalLength);
+        return val*scale;
+    }
 
-    // function rotateObject(obj) 
-    // {
-    //     var newObj={};
-    //     newObj.vertices=[];
-    //     for(var i=0 ; i<obj.vertices.length ; i++)
-    //     {
-    //       newObj.vertices.push(rotatePointViaGyroEulars(obj.vertices[i]));
-    //     }
-    //     return newObj;
-    // }
+    function rotateObject(obj) 
+    {
+        var newObj={};
+        newObj.vertices=[];
+        for(var i=0 ; i<obj.vertices.length ; i++)
+        {
+          newObj.vertices.push(rotatePointViaGyroEulars(obj.vertices[i]));
+        }
+        return newObj;
+    }
 
-    // function rotatePointViaGyroEulars(ra) //rotates 3d point based on eular angles
-    // {
-    //     var oldX=ra[0];
-    //     var oldY=ra[1];
-    //     var oldZ=ra[2];
+    function rotatePointViaGyroEulars(ra) //rotates 3d point based on eular angles
+    {
+        var oldX=ra[0];
+        var oldY=ra[1];
+        var oldZ=ra[2];
         
-    //     //order here is important - it must match the processing order of the device
+        //order here is important - it must match the processing order of the device
         
-    //     //rotate about z axis
-    //     var newX = oldX * Math.cos(-degToRad(deviceOrientationData.alpha)) - oldY * Math.sin(-degToRad(deviceOrientationData.alpha));
-    //     var newY = oldY * Math.cos(-degToRad(deviceOrientationData.alpha)) + oldX * Math.sin(-degToRad(deviceOrientationData.alpha));
+        //rotate about z axis
+        var newX = oldX * Math.cos(-degToRad(deviceOrientationData.alpha)) - oldY * Math.sin(-degToRad(deviceOrientationData.alpha));
+        var newY = oldY * Math.cos(-degToRad(deviceOrientationData.alpha)) + oldX * Math.sin(-degToRad(deviceOrientationData.alpha));
 
-
-        
-    //     //rotate about x axis
-    //     oldY=newY;
-    //     newY = oldY * Math.cos(0) - oldZ * Math.sin(0);
-    //     var newZ = oldZ * Math.cos(0) + oldY * Math.sin(0);
 
         
-    //     //rotate about y axis
-    //     oldZ=newZ;
-    //     oldX=newX;
+        //rotate about x axis
+        oldY=newY;
+        newY = oldY * Math.cos(0) - oldZ * Math.sin(0);
+        var newZ = oldZ * Math.cos(0) + oldY * Math.sin(0);
 
-    //     newZ = oldZ * Math.cos(0) - oldX * Math.sin(0);
-    //     newX = oldX * Math.cos(0) + oldZ * Math.sin(0);
+        
+        //rotate about y axis
+        oldZ=newZ;
+        oldX=newX;
+
+        newZ = oldZ * Math.cos(0) - oldX * Math.sin(0);
+        newX = oldX * Math.cos(0) + oldZ * Math.sin(0);
 
         
 
         
-    //     return [newX,newY,newZ];
-    // }
+        return [newX,newY,newZ];
+    }
             
-    //  </script>
+      </script>
 
    
      <script>
-    var canvas = document.getElementById('canvas');
-    var c = canvas.getContext('2d');
+//     var canvas = document.getElementById('canvas');
+//     var c = canvas.getContext('2d');
 
-    var viewportW = window.innerWidth;
-    var viewportH = window.innerHeight;
+//     var viewportW = window.innerWidth;
+//     var viewportH = window.innerHeight;
 
-    canvas.width = viewportW;
-    canvas.height = viewportH;
+//     canvas.width = viewportW;
+//     canvas.height = viewportH;
     
 
-    c.fillStyle = "#0055ff";
-    c.fillRect(0,viewportH/2,viewportW,viewportH);
+//     c.fillStyle = "#0055ff";
+//     c.fillRect(0,viewportH/2,viewportW,viewportH);
 
-    function Point (x, y){
+//     function Point (x, y){
 
-               this.x = x;
-               this.y = y;
-           }
+//                this.x = x;
+//                this.y = y;
+//            }
 
-    function Line (slope, p){
-        this.slope = slope;
-        this.constant = p.y - slope * p.x;
-    }
+//     function Line (slope, p){
+//         this.slope = slope;
+//         this.constant = p.y - slope * p.x;
+//     }
 
-    Line.prototype.getpY = function(pX) {
-        return pX * this.slope + this.constant;
+//     Line.prototype.getpY = function(pX) {
+//         return pX * this.slope + this.constant;
 
-    };   
+//     };   
 
 
 
-    function drawQuadrangle (p1, p2, p3, p4, color){
-        c.fillStyle = color;
-        c.beginPath();
-        c.moveTo(p1.x, p1.y);
-        c.lineTo(p2.x, p2.y);
-        c.lineTo(p3.x, p3.y);
-        c.lineTo(p4.x, p4.y);
-        c.fill();
-    }
+//     function drawQuadrangle (p1, p2, p3, p4, color){
+//         c.fillStyle = color;
+//         c.beginPath();
+//         c.moveTo(p1.x, p1.y);
+//         c.lineTo(p2.x, p2.y);
+//         c.lineTo(p3.x, p3.y);
+//         c.lineTo(p4.x, p4.y);
+//         c.fill();
+//     }
     
-    var center = new Point(viewportW/2, viewportH/2);
+//     var center = new Point(viewportW/2, viewportH/2);
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------
+// //-----------------------------------------------------------------------------------------------------------------------------------------------
    
-var pa = document.getElementById('alpha'),
-pb = document.getElementById('beta'),
-pg = document.getElementById('gamma');
+// var pa = document.getElementById('alpha'),
+// pb = document.getElementById('beta'),
+// pg = document.getElementById('gamma');
 
 
-    window.ondeviceorientation = function(event) {
+//     window.ondeviceorientation = function(event) {
 
-        c.fillStyle = "#ffffff";
-        c.fillRect(0,0,viewportW,viewportH);
+//         c.fillStyle = "#ffffff";
+//         c.fillRect(0,0,viewportW,viewportH);
 
-        alpha = Math.round(event.alpha);
-        beta = Math.round(event.beta);
-        gamma = Math.round(event.gamma);
+//         alpha = Math.round(event.alpha);
+//         beta = Math.round(event.beta);
+//         gamma = Math.round(event.gamma);
 
-        var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
-        pa.innerHTML = "alpha " + alpha;
-        pb.innerHTML = "beta " + beta;
-        pg.innerHTML = "gamma " + gamma;
+//         var rotatedline = new Line(Math.tan(alpha/180 * Math.PI), center);
+//         pa.innerHTML = "alpha " + alpha;
+//         pb.innerHTML = "beta " + beta;
+//         pg.innerHTML = "gamma " + gamma;
 
     
-          var p1 = new Point(0, rotatedline.getpY(0));
-          var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
-           var p3 = new Point(viewportW, viewportH);
-        var p4 = new Point(0, viewportH);
+//           var p1 = new Point(0, rotatedline.getpY(0));
+//           var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
+//            var p3 = new Point(viewportW, viewportH);
+//         var p4 = new Point(0, viewportH);
         
 
-        drawQuadrangle(p1, p2, p3, p4, "#0055ff");
+//         drawQuadrangle(p1, p2, p3, p4, "#0055ff");
         
        
-    }
+//     }
 
 
      </script>
