@@ -325,25 +325,25 @@ pg = document.getElementById('gamma');
         // beta = Math.round(event.beta);
         // gamma = Math.round(event.gamma);
 
-        var x = Math.ceil(event.accelerationIncludingGravity.x*100)/100;  
+        var x = Math.ceil(event.accelerationIncludingGravity.x*10)/10;  
         var y = Math.round(event.accelerationIncludingGravity.y);  
         var z = Math.round(event.accelerationIncludingGravity.z); 
 
         
         pa.innerHTML = "alpha " + x;
         pb.innerHTML = "beta " + y;
-        pg.innerHTML = "deg " + x*9;
+        pg.innerHTML = "deg " + Math.round(x*9);
 
         
           
 
           if(y <= 0){
-            var rotatedline = new Line(-Math.tan(x*9/180 * Math.PI), center);
+            var rotatedline = new Line(-Math.tan(Math.round(x*9)/180 * Math.PI), center);
             var p3 = new Point(viewportW, viewportH);
             var p4 = new Point(0, viewportH);
 
           } else{
-            var rotatedline = new Line(-Math.tan(x*9/180 * Math.PI), center);
+            var rotatedline = new Line(Math.tan(Math.round(x*9)/180 * Math.PI), center);
             var p3 = new Point(viewportW, 0);
             var p4 = new Point(0, 0);
 
