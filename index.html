@@ -301,7 +301,7 @@ pg = document.getElementById('gamma');
 
 
     window.ondevicemotion = function(){
-        debounce(rotateD(event), 200);
+        debounce(rotateD(event), 300);
     } 
 
     function debounce(fn, delay) {
@@ -325,7 +325,7 @@ pg = document.getElementById('gamma');
         // beta = Math.round(event.beta);
         // gamma = Math.round(event.gamma);
 
-        var x = Math.round(event.accelerationIncludingGravity.x);  
+        var x = Math.round(event.accelerationIncludingGravity.x*100)/100;  
         var y = Math.round(event.accelerationIncludingGravity.y);  
         var z = Math.round(event.accelerationIncludingGravity.z); 
 
