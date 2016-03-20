@@ -325,7 +325,7 @@ pg = document.getElementById('gamma');
         // beta = Math.round(event.beta);
         // gamma = Math.round(event.gamma);
 
-        var x = Math.round(event.accelerationIncludingGravity.x*100)/100;  
+        var x = Math.round(event.accelerationIncludingGravity.x*10)/10;  
         var y = Math.round(event.accelerationIncludingGravity.y);  
         var z = Math.round(event.accelerationIncludingGravity.z); 
 
@@ -337,8 +337,17 @@ pg = document.getElementById('gamma');
         
           var p1 = new Point(0, rotatedline.getpY(0));
           var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
-           var p3 = new Point(viewportW, viewportH);
-        var p4 = new Point(0, viewportH);
+
+          if(y <= 0){
+            var p3 = new Point(viewportW, viewportH);
+            var p4 = new Point(0, viewportH);
+
+          } else{
+            var p3 = new Point(viewportW, 0);
+            var p4 = new Point(0, 0);
+
+          }
+           
         
 
         drawQuadrangle(p1, p2, p3, p4, "#0055ff");
