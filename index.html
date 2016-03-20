@@ -300,7 +300,9 @@ pb = document.getElementById('beta'),
 pg = document.getElementById('gamma');
 
 
-    window.addEventListener("devicemotion", debounce(function (event) {rotateD(event);}, 200));
+    window.ondevicemotion = function(){
+        debounce(rotateD(event), 200);
+    } 
 
     function debounce(fn, delay) {
         var timer = null;
