@@ -325,7 +325,7 @@ pg = document.getElementById('gamma');
         // beta = Math.round(event.beta);
         // gamma = Math.round(event.gamma);
 
-        var x = Math.ceil(event.accelerationIncludingGravity.x*2)/2;  
+        var x = Math.ceil(event.accelerationIncludingGravity.x*4)/4;  
         var y = Math.round(event.accelerationIncludingGravity.y);  
         var z = Math.round(event.accelerationIncludingGravity.z); 
 
@@ -335,9 +335,19 @@ pg = document.getElementById('gamma');
         pg.innerHTML = "gamma " + z;
 
         
-          
+        if( Math.abs(x) === 10){ // exact landscape position
+            var p1 = new Point(viewportW/2, 0);
+            var p2 = new Point(viewportW/2, viewportH);
+            if(x > 0){
+                var p3 = new Point(0, viewportH);
+                var p4 = new Point(0, 0);
+            } else {
+                var p3 = new Point(viewportW, viewportH);
+                var p4 = new Point(viewportW, 0);
+            }
 
-          if(y <= 0){
+        }else {
+            if(y <= 0){
             var rotatedline = new Line(-Math.tan(x*9/180 * Math.PI), center);
             var p3 = new Point(viewportW, viewportH);
             var p4 = new Point(0, viewportH);
@@ -346,12 +356,11 @@ pg = document.getElementById('gamma');
             var rotatedline = new Line(Math.tan(x*9/180 * Math.PI), center);
             var p3 = new Point(viewportW, 0);
             var p4 = new Point(0, 0);
-
           }
-
           var p1 = new Point(0, rotatedline.getpY(0));
           var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
-           
+
+        }  
         
 
         drawQuadrangle(p1, p2, p3, p4, "#0055ff");
