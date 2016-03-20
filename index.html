@@ -313,17 +313,12 @@ pg = document.getElementById('gamma');
         var y = Math.round(event.accelerationIncludingGravity.y);  
         var z = Math.round(event.accelerationIncludingGravity.z); 
 
-        var rotatedline = new Line(Math.tan(alpha/180 * Math.PI)/2, center);
+        var rotatedline = new Line(Math.tan(x*9/180 * Math.PI), center);
         pa.innerHTML = "alpha " + x;
         pb.innerHTML = "beta " + y;
         pg.innerHTML = "gamma " + z;
 
-        if (beta >= 88){
-
-          c.fillStyle = "#0055ff";
-    c.fillRect(0,viewportH/2,viewportW,viewportH);
-
-        } else {
+        
           var p1 = new Point(0, rotatedline.getpY(0));
           var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
            var p3 = new Point(viewportW, viewportH);
@@ -333,7 +328,7 @@ pg = document.getElementById('gamma');
         drawQuadrangle(p1, p2, p3, p4, "#0055ff");
         
 
-        }
+       
 
        
     }
