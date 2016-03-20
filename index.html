@@ -55,6 +55,23 @@
     context.canvas.height = window.innerHeight;
     context.translate(canvas.width / 2, canvas.height / 2); //put 0,0,0 origin at center of screen instead of upper left corner
 
+    function Point (x, y){
+       this.x = x;
+       this.y = y;
+   }
+
+    function drawLine() {
+        context.beginPath(from, to);
+        context.moveTo(from.x, from.y);
+        context.lineTo(to.x, to.y);
+        context.stroke();
+    }
+    function makeLine(width){
+         var newObj={};
+         newObj.vertices=[[-width/2, 0, 0], [width/2, 0, 0]];
+         return newObj;
+    }
+
     function degToRad(deg)// Degree-to-Radian conversion
     {
          return deg * Math.PI / 180; 
@@ -66,7 +83,7 @@
         var hw=width/2;
         var hh=height/2;
         var hd=depth/2;
-        newObj.vertices=[  [-hw,hh,hd],[hw,hh,hd],[hw,-hh,hd],//first triangle
+        newObj.vertices=[ [-hw,hh,hd],[hw,hh,hd],[hw,-hh,hd],//first triangle
                           [-hw,hh,hd],[-hw,-hh,hd],[hw,-hh,hd],//2 triangles make front side
                           [-hw,hh,-hd],[-hw,hh,hd],[-hw,-hh,-hd], //left side
                           [-hw,hh,hd],[-hw,-hh,hd],[-hw,-hh,-hd],
@@ -83,14 +100,17 @@
         return newObj;
     }
 
-    var cube=makeRect(canvas.width/5,canvas.width/5,canvas.width/5);
-    cube.color="purple";
+    // var cube=makeRect(canvas.width/5,canvas.width/5,canvas.width/5);
+    // cube.color="purple";
     var xAxis=makeRect(440,10,10);
     xAxis.color="green";
     var yAxis=makeRect(10,440,10);
     yAxis.color="red";
     var zAxis=makeRect(10,10,440);
     zAxis.color="blue";
+
+    var line1 = makeLine(canvas.width);
+    line1.color = "purple";
 
 
     function renderLoop() {
@@ -106,10 +126,11 @@
         processGyro(this.fakeAlpha,this.fakeBeta,this.fakeGamma);
       }
       
-      renderObj(cube);
-      renderObj(xAxis);
-      renderObj(yAxis);
-      renderObj(zAxis);
+      //renderObj(cube);
+      renderObj(xAxis, 1);
+      renderObj(yAxis, 1);
+      renderObj(zAxis, 1);
+      renderObj2d(line1, 5);
     }
     renderLoop();
 
@@ -136,6 +157,21 @@
             }
         }
     }
+
+    function renderObj2d(obj, lineW)
+    {
+        var rotatedObj=rotateObject(obj);
+        context.lineWidth = lineW;
+        context.strokeStyle = obj.color;
+        
+              
+      context.beginPath();
+      context.moveTo(rotatedObj.vertices[0][0], rotatedObj.vertices[0][1]);
+      context.lineTo(rotatedObj.vertices[1][0], rotatedObj.vertices[1][1]);
+      context.stroke();
+           
+    }
+
 
     function scaleByZ(val,z)
     {
