@@ -309,9 +309,9 @@ pg = document.getElementById('gamma');
         // beta = Math.round(event.beta);
         // gamma = Math.round(event.gamma);
 
-        var x = event.accelerationIncludingGravity.x;  
-        var y = event.accelerationIncludingGravity.y;  
-        var z = event.accelerationIncludingGravity.z; 
+        var x = Math.round(event.accelerationIncludingGravity.x);  
+        var y = Math.round(event.accelerationIncludingGravity.y);  
+        var z = Math.round(event.accelerationIncludingGravity.z); 
 
         var rotatedline = new Line(Math.tan(alpha/180 * Math.PI)/2, center);
         pa.innerHTML = "alpha " + x;
