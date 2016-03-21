@@ -145,7 +145,6 @@
 
      if (window.DeviceMotionEvent) {
         window.addEventListener("devicemotion", function () {
-            document.getElementById("alpha").innerHTML = "hhhhhhhhhh";
             processAccelerationData(
                 event.accelerationIncludingGravity.x, 
                 event.accelerationIncludingGravity.y, 
@@ -162,7 +161,7 @@
         document.getElementById("beta").innerHTML = accelerationIncludingGravityData.y;
         document.getElementById("gamma").innerHTML = accelerationIncludingGravityData.z;
 
-        rotateD();
+        //rotateD();
     }
 
 
@@ -230,7 +229,13 @@
     //         }, delay);
     //     };
     // }
+    renderLoop()
 
+    function renderLoop() {
+      requestAnimationFrame( renderLoop );
+      c.clearRect( 0, 0, canvas.width, canvas.height);
+      rotateD();
+    }
 
     function rotateD() {
 
