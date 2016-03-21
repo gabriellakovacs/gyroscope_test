@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+    <title>gyroscope-test</title>
+    <style>
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+      canvas 
+      { 
+        margin: 0px;
+        width: 100%; 
+        height: 100% ;
+        position: fixed;
+        top:0px;
+        z-index: -10;
+      } 
+    </style>
+
+</head>
+<body>
+    <p id="alphaW"></p>
+    <p id="betaW"></p>
+    <p id="gammaW"></p>
+
+    <p id="alphaG"></p>
+    <p id="betaG"></p>
+    <p id="gammaG"></p>
+
+    
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript" src="fulltilt.js"></script>
+    <script>
+
+
+  var promise = new FULLTILT.getDeviceOrientation({ 'type': 'world' });
+
+  
+  var deviceOrientation;
+
+  promise
+    .then(function(controller) {
+      
+      deviceOrientation = controller;
+    })
+    .catch(function(message) {
+      console.error(message);
+
+      
+    });
+
+  (function draw() {
+
+    if (deviceOrientation) {
+
+      var euler = deviceOrientation.getScreenAdjustedEuler();
+
+      document.getElementById("alphaW").innerHTML = euler.alpha;
+      document.getElementById("betaW").innerHTML = euler.beta;
+      document.getElementById("gammaW").innerHTML = euler.gamma;
+
+    }
+
+    // Execute function on each browser animation frame
+    requestAnimationFrame(draw);
+
+  })();
+
+
+    </script>
+</body>
+</html>
