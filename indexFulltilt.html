@@ -9,15 +9,14 @@
         padding: 0;
     }
 
-      canvas 
-      { 
-        margin: 0px;
-        width: 100%; 
-        height: 100% ;
-        position: fixed;
-        top:0px;
-        z-index: -10;
-      } 
+      #rectangle{
+      	position: fixed;
+      	background: red;
+      	bottom: 0;
+      	left: 0;
+      	height: 50vh;
+      	width: 100vw;
+      }
     </style>
 
 </head>
@@ -30,13 +29,16 @@
     <p id="betaG"></p>
     <p id="gammaG"></p>
 
+    <div id="rectangle"></div>
+
     
     <canvas id="canvas"></canvas>
     <script type="text/javascript" src="fulltilt.js"></script>
     <script>
 
-
+    var rectangle = document.getElementById("rectangle");
   var promise = new FULLTILT.getDeviceOrientation({ 'type': 'world' });
+  var rectRotation = 0;
 
   
   var deviceOrientation;
@@ -61,6 +63,13 @@
       document.getElementById("alphaW").innerHTML = euler.alpha;
       document.getElementById("betaW").innerHTML = euler.beta;
       document.getElementById("gammaW").innerHTML = euler.gamma;
+
+      rectRotation += (euler.alpha * 0.02 - rectRotation) * 0.2;
+
+      rectangle.style.transform = "rotate(" + rectRotation + "deg)";
+
+      
+
 
     }
 
