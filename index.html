@@ -30,39 +30,134 @@
     <canvas id="canvas"></canvas>
     <script>
     
-    var accelerationIncludingGravityData = {x:0, y:0, z:0};
+   //  var accelerationIncludingGravityData = {x:0, y:0, z:0};
 
 
-    if (window.DeviceMotionEvent) {
-        window.addEventListener("ondevicemotion", function () {
-            processAccelerationData(event.accelerationIncludingGravity.x, event.accelerationIncludingGravity.y, event.accelerationIncludingGravity.z); 
-        }, true);
-    } 
+   //  if (window.DeviceMotionEvent) {
+   //      window.addEventListener("ondevicemotion", function () {
+   //          processAccelerationData(event.accelerationIncludingGravity.x, event.accelerationIncludingGravity.y, event.accelerationIncludingGravity.z); 
+   //      }, true);
+   //  } 
 
-    function processAccelerationData(x, y, z) { 
-        accelerationIncludingGravityData.x = Math.round(x * 10) / 10;
-        accelerationIncludingGravityData.y = Math.round(y * 10) / 10;
-        accelerationIncludingGravityData.z = Math.round(z * 10) / 10;
+   //  function processAccelerationData(x, y, z) { 
+   //      accelerationIncludingGravityData.x = Math.round(x * 10) / 10;
+   //      accelerationIncludingGravityData.y = Math.round(y * 10) / 10;
+   //      accelerationIncludingGravityData.z = Math.round(z * 10) / 10;
         
-        document.getElementById("alpha").innerHTML = accelerationIncludingGravityData.x;
-        document.getElementById("beta").innerHTML = accelerationIncludingGravityData.y;
-        document.getElementById("gamma").innerHTML = accelerationIncludingGravityData.z;
-    }
+   //      document.getElementById("alpha").innerHTML = accelerationIncludingGravityData.x;
+   //      document.getElementById("beta").innerHTML = accelerationIncludingGravityData.y;
+   //      document.getElementById("gamma").innerHTML = accelerationIncludingGravityData.z;
+   //  }
+
+   //  function Point (x, y){
+   //     this.x = x;
+   //     this.y = y;
+   // }
+   // var origin = new Point(0, 0);
+
+   // function drawQuadrangle (p1, p2, p3, p4, color){
+   //      context.fillStyle = color;
+   //      context.beginPath();
+   //      context.moveTo(p1.x, p1.y);
+   //      context.lineTo(p2.x, p2.y);
+   //      context.lineTo(p3.x, p3.y);
+   //      context.lineTo(p4.x, p4.y);
+   //      context.fill();
+   //  }
+
+   //  function Line (slope, p){
+   //      this.slope = slope;
+   //      this.constant = p.y - slope * p.x;
+   //  }
+
+   //  Line.prototype.getpY = function(pX) {
+   //      return pX * this.slope + this.constant;
+
+   //  };   
+
+   // function degToRad(deg){
+   //       return deg * Math.PI / 180; 
+   //  }
+
+   //  function renderLoop() {
+   //    requestAnimationFrame( renderLoop );
+   //    context.clearRect( -canvas.width/2, -canvas.height/2, canvas.width, canvas.height);
+   //    renderObj();
+   //  }
+
+   //  var canvas = document.getElementById('canvas');
+   //  var context = canvas.getContext('2d');
+   //  var viewportW = window.innerWidth;
+   //  var viewportH = window.innerHeight;
+
+   //  context.canvas.width  = viewportW;
+   //  context.canvas.height = viewportH;
+   //  context.translate(canvas.width / 2, canvas.height / 2); //put 0,0 origin at center of the screen 
+
+    
+   //  renderLoop();
+
+    
+
+   //  function renderObj(obj){
+
+   //   if( Math.abs(accelerationIncludingGravityData.x) === 10){ // exact landscape position
+   //      var p1 = new Point(0, -viewportH/2);
+   //      var p2 = new Point(0, viewportH/2);
+   //          if(accelerationIncludingGravityData.x > 0){
+   //              var p3 = new Point(viewportW/2, viewportH/2);
+   //              var p4 = new Point(viewportW/2, -viewportH/2);
+   //          } else {
+   //              var p3 = new Point(-viewportW/2, viewportH/2);
+   //              var p4 = new Point(-viewportW/2, -viewportH/2);
+   //          }
+
+   //      }else {
+   //          if(accelerationIncludingGravityData.y <= 0){
+   //          var rotatedline = new Line(-Math.tan(accelerationIncludingGravityData.x * 9/180 * Math.PI), origin);
+   //          var p3 = new Point(viewportW/2, viewportH/2);
+   //          var p4 = new Point(-viewportW/2, viewportH/2);
+
+   //        } else{
+   //          var rotatedline = new Line(Math.tan(accelerationIncludingGravityData.x * 9/180 * Math.PI), origin);
+   //          var p3 = new Point(viewportW/2, -viewportH/2);
+   //          var p4 = new Point(-viewportW/2, -viewportH/2);
+   //        }
+   //        var p1 = new Point(-viewportW/2, rotatedline.getpY(-viewportW/2));
+   //        var p2 = new Point(viewportW/2, rotatedline.getpY(viewportW/2));
+
+   //      }  
+   //      drawQuadrangle (p1, p2, p3, p4, "#0055ff")
+            
+   //  }
+    
+    
+
+ 
+
+
+            
+     </script>
+
+   
+    <script>
+    var canvas = document.getElementById('canvas');
+    var c = canvas.getContext('2d');
+
+    var viewportW = window.innerWidth;
+    var viewportH = window.innerHeight;
+
+    canvas.width = viewportW;
+    canvas.height = viewportH;
+
+
+    c.fillStyle = "#0055ff";
+    c.fillRect(0,viewportH/2,viewportW,viewportH);
 
     function Point (x, y){
-       this.x = x;
-       this.y = y;
-   }
-   var origin = new Point(0, 0);
 
-   function drawQuadrangle (p1, p2, p3, p4, color){
-        context.fillStyle = color;
-        context.beginPath();
-        context.moveTo(p1.x, p1.y);
-        context.lineTo(p2.x, p2.y);
-        context.lineTo(p3.x, p3.y);
-        context.lineTo(p4.x, p4.y);
-        context.fill();
+        this.x = x;
+        this.y = y;
     }
 
     function Line (slope, p){
@@ -75,195 +170,96 @@
 
     };   
 
-   function degToRad(deg){
-         return deg * Math.PI / 180; 
+
+
+    function drawQuadrangle (p1, p2, p3, p4, color){
+        c.fillStyle = color;
+        c.beginPath();
+        c.moveTo(p1.x, p1.y);
+        c.lineTo(p2.x, p2.y);
+        c.lineTo(p3.x, p3.y);
+        c.lineTo(p4.x, p4.y);
+        c.fill();
     }
 
-    function renderLoop() {
-      requestAnimationFrame( renderLoop );
-      context.clearRect( -canvas.width/2, -canvas.height/2, canvas.width, canvas.height);
-      renderObj();
+
+    var center = new Point(viewportW/2, viewportH/2);
+
+
+
+    var pa = document.getElementById('alpha'),
+    pb = document.getElementById('beta'),
+    pg = document.getElementById('gamma');
+
+
+    window.ondevicemotion = function(){
+        debounce(rotateD(event), 300);
+    } 
+
+    function debounce(fn, delay) {
+        var timer = null;
+        return function () {
+            var context = this, args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                fn.apply(context, args);
+            }, delay);
+        };
     }
 
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
-    var viewportW = window.innerWidth;
-    var viewportH = window.innerHeight;
 
-    context.canvas.width  = viewportW;
-    context.canvas.height = viewportH;
-    context.translate(canvas.width / 2, canvas.height / 2); //put 0,0 origin at center of the screen 
+    function rotateD(event) {
 
-    
-    renderLoop();
+        c.fillStyle = "#ffffff";
+        c.fillRect(0,0,viewportW,viewportH);
 
-    
 
-    function renderObj(obj){
 
-     if( Math.abs(accelerationIncludingGravityData.x) === 10){ // exact landscape position
-        var p1 = new Point(0, -viewportH/2);
-        var p2 = new Point(0, viewportH/2);
-            if(accelerationIncludingGravityData.x > 0){
-                var p3 = new Point(viewportW/2, viewportH/2);
-                var p4 = new Point(viewportW/2, -viewportH/2);
+        var x = Math.ceil(event.accelerationIncludingGravity.x*10)/10;  
+        var y = Math.round(event.accelerationIncludingGravity.y);  
+        var z = Math.round(event.accelerationIncludingGravity.z); 
+
+
+        pa.innerHTML = "alpha " + x;
+        pb.innerHTML = "beta " + y;
+        pg.innerHTML = "gamma " + z;
+
+
+        if( Math.abs(x) === 10){ // exact landscape position
+            var p1 = new Point(viewportW/2, 0);
+            var p2 = new Point(viewportW/2, viewportH);
+            if(x > 0){
+                var p3 = new Point(viewportW, viewportH);
+                var p4 = new Point(viewportW, 0);
             } else {
-                var p3 = new Point(-viewportW/2, viewportH/2);
-                var p4 = new Point(-viewportW/2, -viewportH/2);
+                var p3 = new Point(0, viewportH);
+                var p4 = new Point(0, 0);
             }
 
         }else {
-            if(accelerationIncludingGravityData.y <= 0){
-            var rotatedline = new Line(-Math.tan(accelerationIncludingGravityData.x * 9/180 * Math.PI), origin);
-            var p3 = new Point(viewportW/2, viewportH/2);
-            var p4 = new Point(-viewportW/2, viewportH/2);
+            if(y <= 0){
+                var rotatedline = new Line(-Math.tan(x*9/180 * Math.PI), center);
+                var p3 = new Point(viewportW, viewportH);
+                var p4 = new Point(0, viewportH);
 
-          } else{
-            var rotatedline = new Line(Math.tan(accelerationIncludingGravityData.x * 9/180 * Math.PI), origin);
-            var p3 = new Point(viewportW/2, -viewportH/2);
-            var p4 = new Point(-viewportW/2, -viewportH/2);
-          }
-          var p1 = new Point(-viewportW/2, rotatedline.getpY(-viewportW/2));
-          var p2 = new Point(viewportW/2, rotatedline.getpY(viewportW/2));
+            } else{
+                var rotatedline = new Line(Math.tan(x*9/180 * Math.PI), center);
+                var p3 = new Point(viewportW, 0);
+                var p4 = new Point(0, 0);
+            }
+            var p1 = new Point(0, rotatedline.getpY(0));
+            var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
 
         }  
-        drawQuadrangle (p1, p2, p3, p4, "#0055ff")
-            
-    }
-    
-    
-
- 
 
 
-            
-     </script>
-
-   
-    <script>
-//     var canvas = document.getElementById('canvas');
-//     var c = canvas.getContext('2d');
-
-//     var viewportW = window.innerWidth;
-//     var viewportH = window.innerHeight;
-
-//     canvas.width = viewportW;
-//     canvas.height = viewportH;
-    
-
-//     c.fillStyle = "#0055ff";
-//     c.fillRect(0,viewportH/2,viewportW,viewportH);
-
-//     function Point (x, y){
-
-//                this.x = x;
-//                this.y = y;
-//            }
-
-//     function Line (slope, p){
-//         this.slope = slope;
-//         this.constant = p.y - slope * p.x;
-//     }
-
-//     Line.prototype.getpY = function(pX) {
-//         return pX * this.slope + this.constant;
-
-//     };   
+        drawQuadrangle(p1, p2, p3, p4, "#0055ff");
 
 
 
-//     function drawQuadrangle (p1, p2, p3, p4, color){
-//         c.fillStyle = color;
-//         c.beginPath();
-//         c.moveTo(p1.x, p1.y);
-//         c.lineTo(p2.x, p2.y);
-//         c.lineTo(p3.x, p3.y);
-//         c.lineTo(p4.x, p4.y);
-//         c.fill();
-//     }
-//     var quaternion;
-//       var matrix ;
-//       var euler ;
-
-//     var center = new Point(viewportW/2, viewportH/2);
-
-// //-----------------------------------------------------------------------------------------------------------------------------------------------
-   
-// var pa = document.getElementById('alpha'),
-// pb = document.getElementById('beta'),
-// pg = document.getElementById('gamma');
 
 
-//     window.ondevicemotion = function(){
-//         debounce(rotateD(event), 300);
-//     } 
-
-//     function debounce(fn, delay) {
-//         var timer = null;
-//         return function () {
-//             var context = this, args = arguments;
-//             clearTimeout(timer);
-//             timer = setTimeout(function () {
-//                 fn.apply(context, args);
-//             }, delay);
-//         };
-//     }
-
-
-//     function rotateD(event) {
-
-//         c.fillStyle = "#ffffff";
-//         c.fillRect(0,0,viewportW,viewportH);
-
-//         // alpha = Math.round(event.alpha);
-//         // beta = Math.round(event.beta);
-//         // gamma = Math.round(event.gamma);
-
-//         var x = Math.ceil(event.accelerationIncludingGravity.x*10)/10;  
-//         var y = Math.round(event.accelerationIncludingGravity.y);  
-//         var z = Math.round(event.accelerationIncludingGravity.z); 
-
-        
-//         pa.innerHTML = "alpha " + x;
-//         pb.innerHTML = "beta " + y;
-//         pg.innerHTML = "gamma " + z;
-
-        
-//         if( Math.abs(x) === 10){ // exact landscape position
-//             var p1 = new Point(viewportW/2, 0);
-//             var p2 = new Point(viewportW/2, viewportH);
-//             if(x > 0){
-//                 var p3 = new Point(viewportW, viewportH);
-//                 var p4 = new Point(viewportW, 0);
-//             } else {
-//                 var p3 = new Point(0, viewportH);
-//                 var p4 = new Point(0, 0);
-//             }
-
-//         }else {
-//             if(y <= 0){
-//             var rotatedline = new Line(-Math.tan(x*9/180 * Math.PI), center);
-//             var p3 = new Point(viewportW, viewportH);
-//             var p4 = new Point(0, viewportH);
-
-//           } else{
-//             var rotatedline = new Line(Math.tan(x*9/180 * Math.PI), center);
-//             var p3 = new Point(viewportW, 0);
-//             var p4 = new Point(0, 0);
-//           }
-//           var p1 = new Point(0, rotatedline.getpY(0));
-//           var p2 = new Point(viewportW, rotatedline.getpY(viewportW));
-
-//         }  
-        
-
-//         drawQuadrangle(p1, p2, p3, p4, "#0055ff");
-        
-
-       
-
-       
-//     }
+}
 
 
     </script>
