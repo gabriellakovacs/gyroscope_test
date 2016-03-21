@@ -143,6 +143,28 @@
     <script>
     var accelerationIncludingGravityData = {x:0, y:0, z:0};
 
+     if (window.DeviceMotionEvent) {
+        window.addEventListener("ondevicemotion", function () {
+            processAccelerationData(
+                event.accelerationIncludingGravity.x, 
+                event.accelerationIncludingGravity.y, 
+                event.accelerationIncludingGravity.z); 
+        }, true);
+    } 
+
+     function processAccelerationData(x, y, z) { 
+        accelerationIncludingGravityData.x = Math.round(x * 10) / 10;
+        accelerationIncludingGravityData.y = Math.round(y * 10) / 10;
+        accelerationIncludingGravityData.z = Math.round(z * 10) / 10;
+        
+        document.getElementById("alpha").innerHTML = accelerationIncludingGravityData.x;
+        document.getElementById("beta").innerHTML = accelerationIncludingGravityData.y;
+        document.getElementById("gamma").innerHTML = accelerationIncludingGravityData.z;
+
+        rotateD();
+    }
+
+
     var canvas = document.getElementById('canvas');
     var c = canvas.getContext('2d');
 
@@ -193,38 +215,26 @@
     pg = document.getElementById('gamma');
 
 
-    window.ondevicemotion = function(){
-        debounce(rotateD(event), 300);
-    } 
+    // window.ondevicemotion = function(){
+    //     debounce(rotateD(event), 300);
+    // } 
 
-    function debounce(fn, delay) {
-        var timer = null;
-        return function () {
-            var context = this, args = arguments;
-            clearTimeout(timer);
-            timer = setTimeout(function () {
-                fn.apply(context, args);
-            }, delay);
-        };
-    }
+    // function debounce(fn, delay) {
+    //     var timer = null;
+    //     return function () {
+    //         var context = this, args = arguments;
+    //         clearTimeout(timer);
+    //         timer = setTimeout(function () {
+    //             fn.apply(context, args);
+    //         }, delay);
+    //     };
+    // }
 
 
-    function rotateD(event) {
+    function rotateD() {
 
         c.fillStyle = "#ffffff";
         c.fillRect(0,0,viewportW,viewportH);
-
-
-
-        accelerationIncludingGravityData.x = Math.round(event.accelerationIncludingGravity.x * 10) / 10;  
-        accelerationIncludingGravityData.y = Math.round(event.accelerationIncludingGravity.y * 10) / 10;  
-        accelerationIncludingGravityData.z = Math.round(event.accelerationIncludingGravity.z * 10) / 10; 
-
-
-        pa.innerHTML = "alpha " + accelerationIncludingGravityData.x;
-        pb.innerHTML = "beta " + accelerationIncludingGravityData.y;
-        pg.innerHTML = "gamma " + accelerationIncludingGravityData.z;
-
 
         if( Math.abs(accelerationIncludingGravityData.x) === 10){ // exact landscape position
             var p1 = new Point(viewportW/2, 0);
