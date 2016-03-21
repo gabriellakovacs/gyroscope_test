@@ -153,9 +153,9 @@
     } 
 
      function processAccelerationData(x, y, z) { 
-        accelerationIncludingGravityData.x = Math.round(x * 10) / 10;
-        accelerationIncludingGravityData.y = Math.round(y * 10) / 10;
-        accelerationIncludingGravityData.z = Math.round(z * 10) / 10;
+        accelerationIncludingGravityData.x = x;
+        accelerationIncludingGravityData.y = y;
+        accelerationIncludingGravityData.z = z;
         
         document.getElementById("alpha").innerHTML = accelerationIncludingGravityData.x;
         document.getElementById("beta").innerHTML = accelerationIncludingGravityData.y;
