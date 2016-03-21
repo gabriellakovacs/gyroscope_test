@@ -141,6 +141,8 @@
 
    
     <script>
+    var accelerationIncludingGravityData = {x:0, y:0, z:0};
+
     var canvas = document.getElementById('canvas');
     var c = canvas.getContext('2d');
 
@@ -214,20 +216,20 @@
 
 
 
-        var x = Math.round(event.accelerationIncludingGravity.x * 10) / 10;  
-        var y = Math.round(event.accelerationIncludingGravity.y * 10) / 10;  
-        var z = Math.round(event.accelerationIncludingGravity.z * 10) / 10; 
+        accelerationIncludingGravityData.x = Math.round(event.accelerationIncludingGravity.x * 10) / 10;  
+        accelerationIncludingGravityData.y = Math.round(event.accelerationIncludingGravity.y * 10) / 10;  
+        accelerationIncludingGravityData.z = Math.round(event.accelerationIncludingGravity.z * 10) / 10; 
 
 
-        pa.innerHTML = "alpha " + x;
-        pb.innerHTML = "beta " + y;
-        pg.innerHTML = "gamma " + z;
+        pa.innerHTML = "alpha " + accelerationIncludingGravityData.x;
+        pb.innerHTML = "beta " + accelerationIncludingGravityData.y;
+        pg.innerHTML = "gamma " + accelerationIncludingGravityData.z;
 
 
-        if( Math.abs(x) === 10){ // exact landscape position
+        if( Math.abs(accelerationIncludingGravityData.x) === 10){ // exact landscape position
             var p1 = new Point(viewportW/2, 0);
             var p2 = new Point(viewportW/2, viewportH);
-            if(x > 0){
+            if(accelerationIncludingGravityData.x > 0){
                 var p3 = new Point(viewportW, viewportH);
                 var p4 = new Point(viewportW, 0);
             } else {
@@ -236,13 +238,13 @@
             }
 
         }else {
-            if(y <= 0){
-                var rotatedline = new Line(-Math.tan(x*9/180 * Math.PI), center);
+            if(accelerationIncludingGravityData.y <= 0){
+                var rotatedline = new Line(-Math.tan(accelerationIncludingGravityData.x*9/180 * Math.PI), center);
                 var p3 = new Point(viewportW, viewportH);
                 var p4 = new Point(0, viewportH);
 
             } else{
-                var rotatedline = new Line(Math.tan(x*9/180 * Math.PI), center);
+                var rotatedline = new Line(Math.tan(accelerationIncludingGravityData.x*9/180 * Math.PI), center);
                 var p3 = new Point(viewportW, 0);
                 var p4 = new Point(0, 0);
             }
