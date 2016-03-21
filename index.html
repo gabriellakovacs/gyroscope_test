@@ -144,6 +144,7 @@
     var accelerationIncludingGravityData = {x:0, y:0, z:0};
 
      if (window.DeviceMotionEvent) {
+        document.getElementById("alpha").innerHTML = "tttttttt";
         window.addEventListener("ondevicemotion", function () {
             processAccelerationData(
                 event.accelerationIncludingGravity.x, 
