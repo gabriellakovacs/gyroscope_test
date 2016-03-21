@@ -239,9 +239,6 @@
 
     function rotateD() {
 
-        c.fillStyle = "#ffffff";
-        c.fillRect(0,0,viewportW,viewportH);
-
         if( Math.abs(accelerationIncludingGravityData.x) === 10){ // exact landscape position
             var p1 = new Point(viewportW/2, 0);
             var p2 = new Point(viewportW/2, viewportH);
