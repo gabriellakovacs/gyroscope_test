@@ -64,9 +64,9 @@
       document.getElementById("betaW").innerHTML = euler.beta;
       document.getElementById("gammaW").innerHTML = euler.gamma;
 
-      rectRotation += (euler.alpha * 0.02 - rectRotation) * 0.2;
+      rectRotation += (euler.alpha * 0.02 - rectRotation) ;
 
-      rectangle.style.transform = "rotate(" + euler.alpha + "deg)";
+      rectangle.style.transform = "rotate(" + rectRotation + "deg)";
 
       
 
