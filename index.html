@@ -41,7 +41,7 @@ gamma:<span id="gamma"></span><br>
 
     
       //get orientation info, rolling back if gyro info not available
-      if (window.DeviceOrientationEvent) {//
+      if (window.DeviceMotionEvent) {//
           window.addEventListener("deviceorientation", function () {//gyro
               processGyro(event.beta, event.gamma, event.alpha); 
           }, true);
