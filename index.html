@@ -44,7 +44,7 @@ gamma:<span id="gamma"></span><br>
       //get orientation info, rolling back if gyro info not available
       if (window.DeviceMotionEvent) {//
           window.addEventListener("devicemotion", function () {//gyro
-              processGyro(event.rotationRate.alpha, event.rotationRate.beta, event.rotationRate.gamma); 
+              processGyro(event.accelerationIncludingGravity.x, event.accelerationIncludingGravity.y, event.accelerationIncludingGravity.z); 
           }, true);
       } 
 
