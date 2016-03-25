@@ -31,30 +31,25 @@
     
     <script>
 
-    if (Modernizr.touch) { 
-                document.getElementById("alpha").innerHTML = "mobile";
-            } else{
-              document.getElementById("alpha").innerHTML = "non mobile";
-            }
     
-   //  var accelerationIncludingGravityData = {x:0, y:0, z:0};
+    var accelerationIncludingGravityData = {x:0, y:0, z:0};
 
 
-   //  if (window.DeviceMotionEvent) {
-   //      window.addEventListener("ondevicemotion", function () {
-   //          processAccelerationData(event.accelerationIncludingGravity.x, event.accelerationIncludingGravity.y, event.accelerationIncludingGravity.z); 
-   //      }, true);
-   //  } 
+    if (window.DeviceMotionEvent) {
+        window.addEventListener("ondevicemotion", function () {
+            processAccelerationData(event.accelerationIncludingGravity.x, event.accelerationIncludingGravity.y, event.accelerationIncludingGravity.z); 
+        }, true);
+    } 
 
-   //  function processAccelerationData(x, y, z) { 
-   //      accelerationIncludingGravityData.x = Math.round(x * 10) / 10;
-   //      accelerationIncludingGravityData.y = Math.round(y * 10) / 10;
-   //      accelerationIncludingGravityData.z = Math.round(z * 10) / 10;
+    function processAccelerationData(x, y, z) { 
+        accelerationIncludingGravityData.x = Math.round(x * 100) / 10;
+        accelerationIncludingGravityData.y = Math.round(y * 100) / 10;
+        accelerationIncludingGravityData.z = Math.round(z * 100) / 10;
         
-   //      document.getElementById("alpha").innerHTML = accelerationIncludingGravityData.x;
-   //      document.getElementById("beta").innerHTML = accelerationIncludingGravityData.y;
-   //      document.getElementById("gamma").innerHTML = accelerationIncludingGravityData.z;
-   //  }
+        document.getElementById("alpha").innerHTML = accelerationIncludingGravityData.x;
+        document.getElementById("beta").innerHTML = accelerationIncludingGravityData.y;
+        document.getElementById("gamma").innerHTML = accelerationIncludingGravityData.z;
+    }
 
    //  function Point (x, y){
    //     this.x = x;
