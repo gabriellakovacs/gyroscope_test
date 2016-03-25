@@ -18,38 +18,62 @@
         top:0px;
         z-index: -10;*/
       } 
+      .text {
+        position: fixed;
+        top: 50vh;
+        left: 50vw;
+      }
     </style>
     <script type="text/javascript" src="modernizr.js"></script>
 </head>
 <body>
-    <p id="alpha"></p>
-    <p id="beta"></p>
-    <p id="gamma"></p>
+  <div class="text">
+   alpha:<span id="alpha"></span><br>
+beta:<span id="beta"></span><br>
+gamma:<span id="gamma"></span><br>
 
+  </div>
+    
     
     <canvas id="canvas"></canvas>
     
     <script>
 
     
-    var accelerationIncludingGravityData = {x:0, y:0, z:0};
+      //get orientation info, rolling back if gyro info not available
+      if (window.DeviceOrientationEvent) {//
+          window.addEventListener("deviceorientation", function () {//gyro
+              processGyro(event.beta, event.gamma, event.alpha); 
+          }, true);
+      } 
 
 
-    if (window.DeviceMotionEvent) {
-        window.addEventListener("ondevicemotion", function () {
-            processAccelerationData(event.accelerationIncludingGravity.x, event.accelerationIncludingGravity.y, event.accelerationIncludingGravity.z); 
-        }, true);
-    } 
 
-    function processAccelerationData(x, y, z) { 
-        accelerationIncludingGravityData.x = Math.round(x * 100) / 10;
-        accelerationIncludingGravityData.y = Math.round(y * 100) / 10;
-        accelerationIncludingGravityData.z = Math.round(z * 100) / 10;
+      function processGyro(alpha,beta,gamma)
+      {
+        document.getElementById("alpha").innerHTML=alpha;
+        document.getElementById("beta").innerHTML=beta;
+        document.getElementById("gamma").innerHTML =gamma;
+      }
+    // var accelerationIncludingGravityData = {x:0, y:0, z:0};
+    // document.getElementById("alpha").innerHTML = "a";
+
+
+    // //if (window.DeviceMotionEvent) {
+    //     window.addEventListener("ondevicemotion", function () {
+    //         processAccelerationData(event.accelerationIncludingGravity.x, event.accelerationIncludingGravity.y, event.accelerationIncludingGravity.z); 
+    //     }, true);
+    // //} 
+
+    // function processAccelerationData(x, y, z) { 
+    //     accelerationIncludingGravityData.x = Math.round(x * 100) / 10;
+    //     accelerationIncludingGravityData.y = Math.round(y * 100) / 10;
+    //     accelerationIncludingGravityData.z = Math.round(z * 100) / 10;
         
-        document.getElementById("alpha").innerHTML = accelerationIncludingGravityData.x;
-        document.getElementById("beta").innerHTML = accelerationIncludingGravityData.y;
-        document.getElementById("gamma").innerHTML = accelerationIncludingGravityData.z;
-    }
+    //     document.getElementById("alpha").innerHTML = accelerationIncludingGravityData.x;
+    //     document.getElementById("beta").innerHTML = accelerationIncludingGravityData.y;
+    //     document.getElementById("gamma").innerHTML = accelerationIncludingGravityData.z;
+    // }
 
    //  function Point (x, y){
    //     this.x = x;
