@@ -28,6 +28,7 @@
 </head>
 <body>
   <div class="text">
+    <p>changed</p>
    alpha:<span id="alpha"></span><br>
 beta:<span id="beta"></span><br>
 gamma:<span id="gamma"></span><br>
@@ -51,9 +52,9 @@ gamma:<span id="gamma"></span><br>
 
       function processGyro(alpha,beta,gamma)
       {
-        document.getElementById("alpha").innerHTML=alpha;
-        document.getElementById("beta").innerHTML=beta;
-        document.getElementById("gamma").innerHTML =gamma;
+        document.getElementById("alpha").innerHTML=Math.round(100 *alpha) /10;
+        document.getElementById("beta").innerHTML=Math.round(100 *beta) /10;
+        document.getElementById("gamma").innerHTML =Math.round(100 *gamma) /10;
       }
     // var accelerationIncludingGravityData = {x:0, y:0, z:0};
     // document.getElementById("alpha").innerHTML = "a";
