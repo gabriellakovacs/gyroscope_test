@@ -4,29 +4,27 @@
     <title>gyroscope-test</title>
     <style>
 
-    body {
-        margin: 0;
-        padding: 0;
+    html { 
+      height: 100%; 
+      width: 100% 
+    }
+    body { 
+      height: 100%; 
+      width: 100% 
+    }
+    #flat { 
+        height: 10%; 
+        width: 10%;
+        position: absolute; 
+        top: 45%;
+        left: 45%;
+        background: purple;
     }
 
-      canvas 
-      { 
-       /* margin: 0px;
-        width: 100%; 
-        height: 100% ;
-        position: fixed;
-        top:0px;
-        z-index: -10;*/
-      } 
-      .text {
-        position: fixed;
-        top: 50vh;
-        left: 50vw;
-      }
     </style>
-    <script type="text/javascript" src="modernizr.js"></script>
 </head>
 <body>
+  <div id="flat"></div>
   <div class="text">
     <p>changed</p>
    alpha:<span id="alpha"></span><br>
@@ -40,22 +38,36 @@ gamma:<span id="gamma"></span><br>
     
     <script>
 
+    var flat = document.getElementById("flat"),
+    flatStyle = flat.style,
+    _transform = "WebkitTransform" in flatStyle ? "WebkitTransform" :
+        "MozTransform" in flatStyle ? "MozTransform" :
+            "msTransform" in flatStyle ? "msTransform" : false;
+
+_transform && window.addEventListener("deviceorientation", function(e) {
+    flatStyle[_transform] = "perspective(500px) rotateY("+(-e.gamma)+"deg) rotateX("+e.beta+"deg) rotateZ("+-(e.alpha-180)+"deg)";
+
+    document.getElementById("alpha").innerHTML = e.alpha;
+    document.getElementById("beta").innerHTML = e.beta;
+    document.getElementById("gamma").innerHTML = e.gamma;
+});
+
     
-      //get orientation info, rolling back if gyro info not available
-      if (window.DeviceMotionEvent) {//
-          window.addEventListener("devicemotion", function () {//gyro
-              processGyro(event.accelerationIncludingGravity.x, event.accelerationIncludingGravity.y, event.accelerationIncludingGravity.z); 
-          }, true);
-      } 
+      // //get orientation info, rolling back if gyro info not available
+      // if (window.DeviceMotionEvent) {//
+      //     window.addEventListener("devicemotion", function () {//gyro
+      //         processGyro(event.accelerationIncludingGravity.x, event.accelerationIncludingGravity.y, event.accelerationIncludingGravity.z); 
+      //     }, true);
+      // } 
 
 
 
-      function processGyro(alpha,beta,gamma)
-      {
-        document.getElementById("alpha").innerHTML=Math.round(100 *alpha) /10;
-        document.getElementById("beta").innerHTML=Math.round(100 *beta) /10;
-        document.getElementById("gamma").innerHTML =Math.round(100 *gamma) /10;
-      }
+      // function processGyro(alpha,beta,gamma)
+      // {
+      //   document.getElementById("alpha").innerHTML=Math.round(100 *alpha) /10;
+      //   document.getElementById("beta").innerHTML=Math.round(100 *beta) /10;
+      //   document.getElementById("gamma").innerHTML =Math.round(100 *gamma) /10;
+      // }
     // var accelerationIncludingGravityData = {x:0, y:0, z:0};
     // document.getElementById("alpha").innerHTML = "a";
 
