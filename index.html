@@ -42,9 +42,9 @@ if(window.DeviceMotionEvent){
 
 function motion(event){
   
-    x.innerHTML = "x: " + event.accelerationIncludingGravity.x;
-    y.innerHTML = "y: " + event.accelerationIncludingGravity.y;
-    z.innerHTML = "z: " + event.accelerationIncludingGravity.z;
+    x.innerHTML = "x: " + event.accelerationIncludingGravity.x - event.acceleration.x;
+    y.innerHTML = "y: " + event.accelerationIncludingGravity.y - event.acceleration.y;
+    z.innerHTML = "z: " + event.accelerationIncludingGravity.z - event.acceleration.z;
   
 }
       
