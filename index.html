@@ -160,9 +160,9 @@ function rotatePointViaGyroEulars(ra) //rotates 3d point based on eular angles
   var oldY=ra[1];
   var oldZ=ra[2];
 
-  deviceOrientationData.alpha = 0;
-  deviceOrientationData.beta= 0;
-  //deviceOrientationData.gamma = 0;
+  deviceOrientationData.alpha = -deviceOrientationData.alpha;
+  deviceOrientationData.beta= -deviceOrientationData.beta;
+  deviceOrientationData.gamma = -deviceOrientationData.gamma;
   
   //order here is important - it must match the processing order of the device
   
