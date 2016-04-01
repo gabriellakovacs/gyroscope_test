@@ -15,7 +15,6 @@
     margin: 0px;
     width: 100%; 
     height: 100% ;
-    /*The following are not mandatory for canvas to work, but are there because we want the canvas to take up the whole screen while still being able to see the original text*/
     position: fixed;
     top:0px;
     z-index: -10;
@@ -25,9 +24,6 @@
 
 <body>
 
-    alpha:<span id="alpha"></span><br>
-    beta:<span id="beta"></span><br>
-    gamma:<span id="gamma"></span><br>
 
     <canvas id="myCanvas"></canvas>
 <script>
@@ -46,20 +42,18 @@ function processGyro(alpha,beta,gamma)
   deviceOrientationData.alpha=alpha;
   deviceOrientationData.beta=beta;
   deviceOrientationData.gamma=gamma;
-  //note: this code is much simpler but less obvious: function processGyro(event){deviceOrientationData = event;}
   
-  document.getElementById("alpha").innerHTML=alpha;
-  document.getElementById("beta").innerHTML=beta;
-  document.getElementById("gamma").innerHTML =gamma;
+  
+  
 }
 
 var canvas = document.getElementById('myCanvas');
 var context = canvas.getContext('2d');
-context.canvas.width  = window.innerWidth;//resize canvas to whatever window dimensions are
+context.canvas.width  = window.innerWidth;
 context.canvas.height = window.innerHeight;
 context.translate(canvas.width / 2, canvas.height / 2); //put 0,0,0 origin at center of screen instead of upper left corner
 
-function degToRad(deg)// Degree-to-Radian conversion
+function degToRad(deg)
 {
    return deg * Math.PI / 180; 
 }
@@ -192,23 +186,5 @@ function rotatePointViaGyroEulars(ra) //rotates 3d point based on eular angles
    </script>
 
 
-<!-- statcounter stuff is not necessary or part of the tutorial-->
-<!-- Start of StatCounter Code for Default Guide -->
-<script type="text/javascript">
-var sc_project=10456246; 
-var sc_invisible=1; 
-var sc_security="5f76c7a5"; 
-var scJsHost = (("https:" == document.location.protocol) ?
-"https://secure." : "http://www.");
-document.write("<sc"+"ript type='text/javascript' src='" +
-scJsHost+
-"statcounter.com/counter/counter.js'></"+"script>");
-</script>
-<noscript><div class="statcounter"><a title="web statistics"
-href="http://statcounter.com/" target="_blank"><img
-class="statcounter"
-src="http://c.statcounter.com/10456246/0/5f76c7a5/1/"
-alt="web statistics"></a></div></noscript>
-<!-- End of StatCounter Code for Default Guide -->
 </body>
 </html>
